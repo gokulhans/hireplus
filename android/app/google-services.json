@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "770620836493",
+    "project_id": "hireplus-4350a",
+    "storage_bucket": "hireplus-4350a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770620836493:android:3e4bc25f14dfde48a2b0c4",
+        "android_client_info": {
+          "package_name": "com.example.hireplus"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDehpxVf0c1LueQZaOYJycAKYq7uI7LcZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
