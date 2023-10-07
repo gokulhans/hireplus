@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/pages/exithome/exithome.dart';
-import 'package:hireplus/pages/home/Homescreen.dart';
 import 'package:hireplus/utils/widget_functions.dart';
 
 class SplashScreen extends StatefulWidget {
