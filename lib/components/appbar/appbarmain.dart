@@ -29,7 +29,7 @@ class AppBarMain extends StatelessWidget {
         IconButton(
           padding: const EdgeInsets.symmetric(horizontal: 24),
           icon: const Icon(
-            FontAwesomeIcons.graduationCap,
+            Icons.notifications_active,
             size: 20,
             color: Colors.blue,
           ),

@@ -14,7 +14,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int currentIndex = 0;
-  final screens = [const Login(), const SignUp(), const Login(), const Login()];
+  final screens = [
+    const UserLoginPage(),
+    const UserLoginPage(),
+    const UserSignUpPage(),
+    const UserSignUpPage()
+  ];
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,11 +53,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 icon: Icon(Icons.home),
                 label: 'Home',
               ),
+              BottomNavigationBarItem(icon: Icon(Icons.work), label: 'Jobs'),
               BottomNavigationBarItem(
-                  icon: Icon(Icons.chat), label: 'Community'),
-              BottomNavigationBarItem(
-                  icon: Icon(Icons.notifications_active),
-                  label: 'Notifications'),
+                  icon: Icon(Icons.chat), label: 'Messages'),
               BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,
