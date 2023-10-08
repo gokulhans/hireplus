@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hireplus/components/containers/buildboxcolorContainer.dart';
+import 'package:hireplus/components/containers/buildboxcolorcontainer.dart';
 import 'package:hireplus/components/containers/buildboxshadowcontainer.dart';
 import 'package:hireplus/utils/color_constants.dart';
-import 'package:hireplus/utils/constants.dart';
 import 'package:hireplus/utils/widget_functions.dart';
 
 class UserHomePage extends StatefulWidget {
