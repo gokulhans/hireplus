@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hireplus/screens/notification/user_notification/user_notification.dart';
+import 'package:hireplus/screens/notification/recruiter_notification.dart/recruiter_notification.dart';
 
-class AppBarMain extends StatelessWidget {
-  const AppBarMain({super.key});
+class RecruiterAppBarMain extends StatelessWidget {
+  const RecruiterAppBarMain({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +34,7 @@ class AppBarMain extends StatelessWidget {
             color: Colors.blue,
           ),
           onPressed: () async {
-            Get.to(const UserNotifications());
+            Get.to(const RecruiterNotifications());
           },
         ),
       ],

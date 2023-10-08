@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/pages/about/aboutus.dart';
+import 'package:hireplus/pages/welcomehome/welcomehome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -19,10 +20,19 @@ class _NavDrawerState extends State<NavDrawer> {
   }
 
   bool isUser = false;
+
   void onload() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    var user = await pref.getBool('user');
-    if (user!) {
+    bool user = false;
+    bool recruiter = false;
+    if (pref.getBool('user') != null) {
+      user = pref.getBool('user')!;
+    }
+    if (pref.getBool('recruiter') != null) {
+      recruiter = pref.getBool('recruiter')!;
+    }
+    if (user || recruiter) {
+      print("user true");
       setState(() {
         isUser = true;
       });
@@ -179,15 +189,21 @@ class _NavDrawerState extends State<NavDrawer> {
                         await SharedPreferences.getInstance();
                     await pref.remove('user');
                     await pref.remove('username');
+                    await pref.remove('useremail');
                     await pref.remove('userid');
-                    // Get.offAll(MainPage());
+                    await pref.remove('recruiter');
+                    await pref.remove('recruitername');
+                    await pref.remove('recruiteremail');
+                    await pref.remove('recruiterid');
+
+                    Get.offAll(const WelcomeScreen());
                   },
                 )
               : ListTile(
                   leading: const Icon(FontAwesomeIcons.lock),
                   title: const Text('Login'),
                   onTap: () async {
-                    // Get.to(UserLoginPage());
+                    Get.to(const WelcomeScreen());
                   },
                 ),
         ],

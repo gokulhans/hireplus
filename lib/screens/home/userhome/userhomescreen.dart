@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:hireplus/components/appbar/appbarmain.dart';
 import 'package:hireplus/components/sidebar/sidebar.dart';
 import 'package:hireplus/screens/auth/login/login.dart';
 import 'package:hireplus/screens/auth/signup/signup.dart';
+import 'package:hireplus/screens/home/userhome/userhomepage.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class UserHomeScreen extends StatefulWidget {
+  const UserHomeScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<UserHomeScreen> createState() => _UserHomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _UserHomeScreenState extends State<UserHomeScreen> {
   int currentIndex = 0;
   final screens = [
-    const UserLoginPage(),
+    const UserHomePage(),
     const UserLoginPage(),
     const UserSignUpPage(),
     const UserSignUpPage()

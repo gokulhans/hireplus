@@ -1,9 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/models/usermodels.dart';
-import 'package:hireplus/pages/home/homescreen.dart';
 import 'package:hireplus/screens/auth/login/login.dart';
+import 'package:hireplus/screens/home/userhome/userhomescreen.dart';
 import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
 import 'package:hireplus/utils/text_strings.dart';
@@ -19,11 +21,13 @@ class UserSignUpPage extends StatefulWidget {
 class _UserSignUpPageState extends State<UserSignUpPage> {
   UserModel user = UserModel("", "", "", "");
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore db = FirebaseFirestore.instance;
 
   Future<void> _registerWithEmailAndPassword() async {
     Color? msgclr;
     String? msg;
     String? msgdesc;
+
     try {
       UserCredential userCredential =
           await _auth.createUserWithEmailAndPassword(
@@ -31,27 +35,33 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
         password: user.password,
       );
 
-      // Update user profile with additional information
-      await userCredential.user!.updateDisplayName(user.name);
+      final userdata = {
+        'email': user.email,
+        'name': user.name,
+        'phone': user.phone,
+        'password': user.password,
+        'blockstatus': 'no'
+      };
 
-      // You can also update the user's phone number if needed
-      await userCredential.user!
-          .updatePhoneNumber(user.phone as PhoneAuthCredential);
-
-      print(
-          'User registered: ${userCredential.user!.displayName}, Phone: ${userCredential.user!.phoneNumber}');
+      db.collection("users").add(userdata).then((documentSnapshot) =>
+          print("Added Data with ID: ${documentSnapshot.id}"));
 
       msgclr = Colors.blue[400];
       msg = "Signup Success";
-      msgdesc = "User Signed Successfully";
+      msgdesc = "Account Created Successfully";
+
       setState(() {
         isFailed = false;
       });
+
       SharedPreferences pref = await SharedPreferences.getInstance();
       await pref.setString('username', user.name);
       await pref.setString('useremail', user.email);
       await pref.setString('userid', userCredential.user!.uid);
       await pref.setBool('user', true);
+
+      Get.offAll(() => const UserHomeScreen());
+
       Get.snackbar(
         msg,
         msgdesc,
@@ -66,17 +76,17 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
         dismissDirection: DismissDirection.horizontal,
         forwardAnimationCurve: Curves.bounceIn,
       );
-      Get.offAll(() => const HomeScreen());
     } on FirebaseAuthException catch (e) {
       print('Failed to register: $e');
-
       msgclr = Colors.red[400];
       msg = "Signup Failed";
       msgdesc = "Email already in use";
+
       setState(() {
         isFailed = true;
         isLoading = false;
       });
+
       Get.snackbar(
         msg,
         msgdesc,

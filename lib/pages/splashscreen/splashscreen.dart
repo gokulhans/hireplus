@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:hireplus/screens/home/recruiterhome/recruiterhomescreen.dart';
+import 'package:hireplus/screens/home/userhome/userhomescreen.dart';
 import 'package:hireplus/utils/widget_functions.dart';
 import 'package:hireplus/pages/onboarding/onboarding.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +19,17 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3)).then((value) async {
-      Get.to(() => const OnBoardingPage());
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      bool? user = await pref.getBool('user');
+      bool? recruiter = await pref.getBool('recruiter');
+      print({user, recruiter});
+      if (recruiter!) {
+        Get.to(() => const RecruiterHomeScreen());
+      } else if (user!) {
+        Get.to(() => const UserHomeScreen());
+      } else {
+        Get.to(() => const OnBoardingPage());
+      }
     });
   }
 

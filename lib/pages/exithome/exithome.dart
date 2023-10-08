@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:hireplus/pages/home/homescreen.dart';
+import 'package:hireplus/screens/home/userhome/userhomescreen.dart';
 
 class Exithome extends StatelessWidget {
   @override
@@ -35,7 +35,7 @@ class Exithome extends StatelessWidget {
     return WillPopScope(
         onWillPop: showExitPopup,
         child: const Scaffold(
-          body: HomeScreen(),
+          body: UserHomeScreen(),
         ));
   }
 }

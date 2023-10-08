@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hireplus/models/usermodels.dart';
 import 'package:hireplus/screens/auth/signup/signup.dart';
 import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
@@ -18,7 +20,21 @@ class UserLoginPage extends StatefulWidget {
 // TextEditingController pswdController = TextEditingController(text: '');
 
 class _UserLoginPageState extends State<UserLoginPage> {
-  // // UserLoginModel users = UserLoginModel('', '');
+  UserModel user = UserModel("", "", "", "");
+
+// try {
+//   final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+//     email: user.email,
+//     password: user.password
+//   );
+// } on FirebaseAuthException catch (e) {
+//   if (e.code == 'user-not-found') {
+//     print('No user found for that email.');
+//   } else if (e.code == 'wrong-password') {
+//     print('Wrong password provided for that user.');
+//   }
+// }
+
   bool isLoading = false;
   // Future login_save(BuildContext context) async {
   //   // print({users.email, users.pswd});
