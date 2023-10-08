@@ -215,7 +215,6 @@ class _UserHomePageState extends State<UserHomePage> {
                         padding: MaterialStateProperty.all(EdgeInsets.zero),
                       ),
                       child: ListTile(
-                        contentPadding: EdgeInsets.all(8),
                         leading: Container(
                           width: 50,
                           height: 50,
