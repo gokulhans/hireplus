@@ -285,8 +285,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           //   index = 2;
           //   setIndex(2);
           // }
-          // Get.to(() => const WelcomeScreen());
-          Get.to(() => const UserNotifications());
+          Get.to(() => const WelcomeScreen());
         },
         child: const Padding(
           padding: defaultSkipButtonPadding,

@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hireplus/models/usermodels.dart';
+import 'package:hireplus/pages/home/homescreen.dart';
 import 'package:hireplus/screens/auth/login/login.dart';
 import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
 import 'package:hireplus/utils/text_strings.dart';
 import 'package:hireplus/utils/widget_functions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserSignUpPage extends StatefulWidget {
   const UserSignUpPage({super.key});
@@ -12,91 +16,83 @@ class UserSignUpPage extends StatefulWidget {
   State<UserSignUpPage> createState() => _UserSignUpPageState();
 }
 
-// TextEditingController nameController = TextEditingController(text: '');
-// TextEditingController emailController = TextEditingController(text: '');
-// TextEditingController pswdController = TextEditingController(text: '');
-
-// UserSignUpModel users = UserSignUpModel(
-//   '',
-//   '',
-//   '',
-//   '',
-// );
-
 class _UserSignUpPageState extends State<UserSignUpPage> {
-  // Future signup_save(BuildContext context) async {
-  //   print({users.name, users.email, users.pswd});
-  //   final response = await http.post(
-  //       Uri.parse(
-  //         "${apidomain2}auths/pro/signup",
-  //       ),
-  //       headers: <String, String>{
-  //         'Context-Type': 'application/json; charset=UTF-8',
-  //       },
-  //       body: <String, String>{
-  //         'name': users.name,
-  //         'email': users.email,
-  //         'phone': users.phone,
-  //         'pswd': users.pswd,
-  //       });
+  UserModel user = UserModel("", "", "", "");
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  //   Color? msgclr;
-  //   String? msg;
-  //   String? msgdesc;
-  //   var str;
+  Future<void> _registerWithEmailAndPassword() async {
+    Color? msgclr;
+    String? msg;
+    String? msgdesc;
+    try {
+      UserCredential userCredential =
+          await _auth.createUserWithEmailAndPassword(
+        email: user.email,
+        password: user.password,
+      );
 
-  //   if (response.statusCode == 201) {
-  //     var jsonData = jsonDecode(response.body);
-  //     str = jsonData[0]["id"];
-  //     msgclr = Colors.blue[400];
-  //     msg = "Signup Success";
-  //     msgdesc = "User Signed Successfully";
-  //     setState(() {
-  //       isFailed = false;
-  //     });
-  //     SharedPreferences pref = await SharedPreferences.getInstance();
-  //     await pref.setString('username', users.name);
-  //     await pref.setString('userid', jsonData[0]["id"]);
-  //     await pref.setBool('user', true);
-  //     Get.snackbar(
-  //       msg,
-  //       msgdesc,
-  //       icon: const Icon(Icons.person, color: Colors.white),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: msgclr,
-  //       borderRadius: 12,
-  //       margin: const EdgeInsets.all(15),
-  //       colorText: Colors.white,
-  //       duration: const Duration(seconds: 3),
-  //       isDismissible: true,
-  //       dismissDirection: DismissDirection.horizontal,
-  //       forwardAnimationCurve: Curves.bounceIn,
-  //     );
-  //     Get.offAll(() => MainPage());
-  //   } else {
-  //     msgclr = Colors.red[400];
-  //     msg = "Signup Failed";
-  //     msgdesc = "Email already in use";
-  //     setState(() {
-  //       isFailed = true;
-  //       isLoading = false;
-  //     });
-  //     Get.snackbar(
-  //       msg,
-  //       msgdesc,
-  //       icon: const Icon(Icons.person, color: Colors.white),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: msgclr,
-  //       borderRadius: 12,
-  //       margin: const EdgeInsets.all(15),
-  //       colorText: Colors.white,
-  //       duration: const Duration(seconds: 3),
-  //       isDismissible: true,
-  //       dismissDirection: DismissDirection.horizontal,
-  //       forwardAnimationCurve: Curves.bounceIn,
-  //     );
-  //   }
-  // }
+      // Update user profile with additional information
+      await userCredential.user!.updateDisplayName(user.name);
+
+      // You can also update the user's phone number if needed
+      await userCredential.user!
+          .updatePhoneNumber(user.phone as PhoneAuthCredential);
+
+      print(
+          'User registered: ${userCredential.user!.displayName}, Phone: ${userCredential.user!.phoneNumber}');
+
+      msgclr = Colors.blue[400];
+      msg = "Signup Success";
+      msgdesc = "User Signed Successfully";
+      setState(() {
+        isFailed = false;
+      });
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setString('username', user.name);
+      await pref.setString('useremail', user.email);
+      await pref.setString('userid', userCredential.user!.uid);
+      await pref.setBool('user', true);
+      Get.snackbar(
+        msg,
+        msgdesc,
+        icon: const Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: msgclr,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.bounceIn,
+      );
+      Get.offAll(() => const HomeScreen());
+    } on FirebaseAuthException catch (e) {
+      print('Failed to register: $e');
+
+      msgclr = Colors.red[400];
+      msg = "Signup Failed";
+      msgdesc = "Email already in use";
+      setState(() {
+        isFailed = true;
+        isLoading = false;
+      });
+      Get.snackbar(
+        msg,
+        msgdesc,
+        icon: const Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: msgclr,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.bounceIn,
+      );
+    }
+  }
 
   bool isLoading = false;
   bool isFailed = false;
@@ -141,7 +137,7 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
                         initialValue: "",
                         // //controller: nameController,
                         onChanged: (val) {
-                          // users.name = val;
+                          user.name = val;
                         },
                         decoration: const InputDecoration(
                             labelText: 'Name ',
@@ -167,7 +163,7 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
                         },
                         // //controller: emailController,
                         onChanged: (val) {
-                          // users.email = val;
+                          user.email = val;
                         },
                         decoration: const InputDecoration(
                             labelText: 'Email',
@@ -183,7 +179,7 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
                       TextField(
                         // //controller: emailController,
                         onChanged: (val) {
-                          // users.phone = val;
+                          user.phone = val;
                         },
                         keyboardType: TextInputType.number,
                         decoration: const InputDecoration(
@@ -258,10 +254,17 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
                       //           borderSide: BorderSide(color: Colors.blue))),
                       // ),
                       // const SizedBox(height: 10.0),
-                      TextField(
+                      TextFormField(
                         // //controller: pswdController,
                         onChanged: (val) {
-                          // users.pswd = val;
+                          user.password = val;
+                        },
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        validator: (value) {
+                          if (value!.length < 6) {
+                            return 'Minimum 6 characters';
+                          }
+                          return null;
                         },
                         decoration: const InputDecoration(
                             labelText: 'Password',
@@ -269,9 +272,8 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
                                 fontFamily: 'Montserrat',
                                 fontWeight: FontWeight.bold,
                                 color: Colors.grey),
-                            focusedBorder: UnderlineInputBorder(
-                                borderSide: BorderSide(color: Colors.blue))),
-                        // //obscureText: true,
+                            focusedBorder: const UnderlineInputBorder(
+                                borderSide: BorderSide(color: Colors.green))),
                       ),
                       isFailed
                           ? const Padding(
@@ -298,6 +300,7 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
                                 setState(() {
                                   isLoading = true;
                                 });
+                                _registerWithEmailAndPassword();
                                 print("saved");
                                 // if (users.email.isEmpty ||
                                 //     !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
