@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/screens/auth/signup/signup.dart';
@@ -6,7 +5,6 @@ import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
 import 'package:hireplus/utils/text_strings.dart';
 import 'package:hireplus/utils/widget_functions.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class UserLoginPage extends StatefulWidget {
   const UserLoginPage({super.key});

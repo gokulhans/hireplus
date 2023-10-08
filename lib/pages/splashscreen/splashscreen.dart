@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hireplus/pages/exithome/exithome.dart';
 import 'package:hireplus/utils/widget_functions.dart';
 import 'package:hireplus/pages/onboarding/onboarding.dart';
 

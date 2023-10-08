@@ -1,13 +1,10 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/screens/auth/recruiter_login/recruiter_login.dart';
-import 'package:hireplus/utils/constants.dart';
 import 'package:hireplus/utils/text_strings.dart';
 import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
 import 'package:hireplus/utils/widget_functions.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 bool isLoading = false;
 
@@ -217,8 +214,8 @@ class _RecruiterSignUpPageState extends State<RecruiterSignUpPage> {
                             autovalidateMode:
                                 AutovalidateMode.onUserInteraction,
                             validator: (value) {
-                              String pattern =
-                                  r'^(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
+                              // String pattern =
+                              //     r'^(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$';
                               // if (value != owners.pswd ||
                               //     !RegExp(pattern).hasMatch(value!)) {
                               //   return 'Minimum 8 characters, At least one number and \none special character';

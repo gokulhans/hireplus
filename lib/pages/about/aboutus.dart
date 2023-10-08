@@ -38,19 +38,19 @@ class ListViewBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<String> appdata = [
-      'App Name',
-      'App Version',
-      'Developed by',
-      'Spacial Thanks'
-    ];
-    List<String> devdata = ['hireplus', 'V 1.0.0', 'gbroz', 'Fayiz'];
-    List<String> linkdata = [
-      'https://play.google.com/store/apps/details?id=com.gbroz.hireplus',
-      '',
-      'https://www.instagram.com/gbrozdev/',
-      'https://www.instagram.com/fe_y_z_/'
-    ];
+    // List<String> appdata = [
+    //   'App Name',
+    //   'App Version',
+    //   'Developed by',
+    //   'Spacial Thanks'
+    // ];
+    // List<String> devdata = ['hireplus', 'V 1.0.0', 'gbroz', 'Fayiz'];
+    // List<String> linkdata = [
+    //   'https://play.google.com/store/apps/details?id=com.gbroz.hireplus',
+    //   '',
+    //   'https://www.instagram.com/gbrozdev/',
+    //   'https://www.instagram.com/fe_y_z_/'
+    // ];
 
     return Column(
       children: [

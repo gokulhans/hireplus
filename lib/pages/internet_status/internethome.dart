@@ -2,7 +2,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:hireplus/components/appbar/appbarmain.dart';
 import 'package:hireplus/pages/splashscreen/splashscreen.dart';
 import 'package:hireplus/pages/update/updatehome.dart';
 import 'package:hireplus/utils/widget_functions.dart';

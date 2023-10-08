@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/pages/about/aboutus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:hireplus/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -15,6 +14,7 @@ class NavDrawer extends StatefulWidget {
 class _NavDrawerState extends State<NavDrawer> {
   @override
   void initState() {
+    super.initState();
     onload();
   }
 
