@@ -28,21 +28,24 @@ class _UserHomePageState extends State<UserHomePage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             addVerticalSpace(10),
-            BuildBoxShadowContainer(
-              child: TextField(
-                controller: _searchController,
-                decoration: const InputDecoration(
-                  labelText: 'Search',
-                  hintText: 'Search...',
-                  prefixIcon: Icon(Icons.search),
-                  border: InputBorder.none,
-                  focusedBorder: InputBorder.none,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: BuildBoxShadowContainer(
+                child: TextField(
+                  controller: _searchController,
+                  decoration: const InputDecoration(
+                    labelText: 'Search',
+                    hintText: 'Search...',
+                    prefixIcon: Icon(Icons.search),
+                    border: InputBorder.none,
+                    focusedBorder: InputBorder.none,
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _searchQuery = value;
+                    });
+                  },
                 ),
-                onChanged: (value) {
-                  setState(() {
-                    _searchQuery = value;
-                  });
-                },
               ),
             ),
             addVerticalSpace(30),
