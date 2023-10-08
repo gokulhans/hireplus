@@ -112,10 +112,11 @@ class _RecruiterSignUpPageState extends State<RecruiterSignUpPage> {
                       Container(
                         padding:
                             const EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             tOwnerSignUp,
-                            style: Theme.of(context).textTheme.headline1,
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
@@ -312,90 +313,90 @@ class _RecruiterSignUpPageState extends State<RecruiterSignUpPage> {
                                       isLoading = true;
                                     });
                                     // print("saved");
-                                  //   if (owners.email.isEmpty ||
-                                  //       !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
-                                  //           .hasMatch(owners.email)) {
-                                  //     Get.snackbar(
-                                  //       "Invalid Email",
-                                  //       "Enter Valid Email Address",
-                                  //       icon: const Icon(Icons.person,
-                                  //           color: Colors.white),
-                                  //       snackPosition: SnackPosition.BOTTOM,
-                                  //       backgroundColor: Colors.red,
-                                  //       borderRadius: 12,
-                                  //       margin: const EdgeInsets.all(15),
-                                  //       colorText: Colors.white,
-                                  //       duration: const Duration(seconds: 3),
-                                  //       isDismissible: true,
-                                  //       dismissDirection:
-                                  //           DismissDirection.horizontal,
-                                  //       forwardAnimationCurve: Curves.bounceIn,
-                                  //     );
-                                  //     setState(() {
-                                  //       isLoading = false;
-                                  //     });
-                                  //   } else if (owners.name.isEmpty ||
-                                  //       owners.email.isEmpty ||
-                                  //       owners.phone.isEmpty ||
-                                  //       owners.pswd.isEmpty) {
-                                  //     Get.snackbar(
-                                  //       "Fill Every Field",
-                                  //       "Fill every fields to continue",
-                                  //       icon: const Icon(Icons.person,
-                                  //           color: Colors.white),
-                                  //       snackPosition: SnackPosition.BOTTOM,
-                                  //       backgroundColor: Colors.red,
-                                  //       borderRadius: 12,
-                                  //       margin: const EdgeInsets.all(15),
-                                  //       colorText: Colors.white,
-                                  //       duration: const Duration(seconds: 3),
-                                  //       isDismissible: true,
-                                  //       dismissDirection:
-                                  //           DismissDirection.horizontal,
-                                  //       forwardAnimationCurve: Curves.bounceIn,
-                                  //     );
-                                  //     setState(() {
-                                  //       isLoading = false;
-                                  //     });
-                                  //   } else if (owners.pswd != repswd) {
-                                  //     Get.snackbar(
-                                  //       "Password Didn't Match",
-                                  //       "Password and Re entered Password Are Different",
-                                  //       icon: const Icon(Icons.person,
-                                  //           color: Colors.white),
-                                  //       snackPosition: SnackPosition.BOTTOM,
-                                  //       backgroundColor: Colors.red,
-                                  //       borderRadius: 12,
-                                  //       margin: const EdgeInsets.all(15),
-                                  //       colorText: Colors.white,
-                                  //       duration: const Duration(seconds: 3),
-                                  //       isDismissible: true,
-                                  //       dismissDirection:
-                                  //           DismissDirection.horizontal,
-                                  //       forwardAnimationCurve: Curves.bounceIn,
-                                  //     );
-                                  //   } else if (!RegExp(
-                                  //           r'^(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
-                                  //       .hasMatch(owners.pswd)) {
-                                  //     Get.snackbar(
-                                  //       "Password Not Secure",
-                                  //       "Minimum 8 characters, one number and one spacial character",
-                                  //       icon: const Icon(Icons.person,
-                                  //           color: Colors.white),
-                                  //       snackPosition: SnackPosition.BOTTOM,
-                                  //       backgroundColor: Colors.red,
-                                  //       borderRadius: 12,
-                                  //       margin: const EdgeInsets.all(15),
-                                  //       colorText: Colors.white,
-                                  //       duration: const Duration(seconds: 3),
-                                  //       isDismissible: true,
-                                  //       dismissDirection:
-                                  //           DismissDirection.horizontal,
-                                  //       forwardAnimationCurve: Curves.bounceIn,
-                                  //     );
-                                  //   } else {
-                                  //     save();
-                                  //   }
+                                    //   if (owners.email.isEmpty ||
+                                    //       !RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$')
+                                    //           .hasMatch(owners.email)) {
+                                    //     Get.snackbar(
+                                    //       "Invalid Email",
+                                    //       "Enter Valid Email Address",
+                                    //       icon: const Icon(Icons.person,
+                                    //           color: Colors.white),
+                                    //       snackPosition: SnackPosition.BOTTOM,
+                                    //       backgroundColor: Colors.red,
+                                    //       borderRadius: 12,
+                                    //       margin: const EdgeInsets.all(15),
+                                    //       colorText: Colors.white,
+                                    //       duration: const Duration(seconds: 3),
+                                    //       isDismissible: true,
+                                    //       dismissDirection:
+                                    //           DismissDirection.horizontal,
+                                    //       forwardAnimationCurve: Curves.bounceIn,
+                                    //     );
+                                    //     setState(() {
+                                    //       isLoading = false;
+                                    //     });
+                                    //   } else if (owners.name.isEmpty ||
+                                    //       owners.email.isEmpty ||
+                                    //       owners.phone.isEmpty ||
+                                    //       owners.pswd.isEmpty) {
+                                    //     Get.snackbar(
+                                    //       "Fill Every Field",
+                                    //       "Fill every fields to continue",
+                                    //       icon: const Icon(Icons.person,
+                                    //           color: Colors.white),
+                                    //       snackPosition: SnackPosition.BOTTOM,
+                                    //       backgroundColor: Colors.red,
+                                    //       borderRadius: 12,
+                                    //       margin: const EdgeInsets.all(15),
+                                    //       colorText: Colors.white,
+                                    //       duration: const Duration(seconds: 3),
+                                    //       isDismissible: true,
+                                    //       dismissDirection:
+                                    //           DismissDirection.horizontal,
+                                    //       forwardAnimationCurve: Curves.bounceIn,
+                                    //     );
+                                    //     setState(() {
+                                    //       isLoading = false;
+                                    //     });
+                                    //   } else if (owners.pswd != repswd) {
+                                    //     Get.snackbar(
+                                    //       "Password Didn't Match",
+                                    //       "Password and Re entered Password Are Different",
+                                    //       icon: const Icon(Icons.person,
+                                    //           color: Colors.white),
+                                    //       snackPosition: SnackPosition.BOTTOM,
+                                    //       backgroundColor: Colors.red,
+                                    //       borderRadius: 12,
+                                    //       margin: const EdgeInsets.all(15),
+                                    //       colorText: Colors.white,
+                                    //       duration: const Duration(seconds: 3),
+                                    //       isDismissible: true,
+                                    //       dismissDirection:
+                                    //           DismissDirection.horizontal,
+                                    //       forwardAnimationCurve: Curves.bounceIn,
+                                    //     );
+                                    //   } else if (!RegExp(
+                                    //           r'^(?=.*?[0-9])(?=.*?[!@#\$&*~]).{8,}$')
+                                    //       .hasMatch(owners.pswd)) {
+                                    //     Get.snackbar(
+                                    //       "Password Not Secure",
+                                    //       "Minimum 8 characters, one number and one spacial character",
+                                    //       icon: const Icon(Icons.person,
+                                    //           color: Colors.white),
+                                    //       snackPosition: SnackPosition.BOTTOM,
+                                    //       backgroundColor: Colors.red,
+                                    //       borderRadius: 12,
+                                    //       margin: const EdgeInsets.all(15),
+                                    //       colorText: Colors.white,
+                                    //       duration: const Duration(seconds: 3),
+                                    //       isDismissible: true,
+                                    //       dismissDirection:
+                                    //           DismissDirection.horizontal,
+                                    //       forwardAnimationCurve: Curves.bounceIn,
+                                    //     );
+                                    //   } else {
+                                    //     save();
+                                    //   }
                                   },
                                   child: isLoading
                                       ? const Center(
@@ -434,7 +435,8 @@ class _RecruiterSignUpPageState extends State<RecruiterSignUpPage> {
                               fontWeight: FontWeight.bold,
                               decoration: TextDecoration.underline,
                             )),
-                        onPressed: () => Get.to(() => const RecruiterLoginPage()),
+                        onPressed: () =>
+                            Get.to(() => const RecruiterLoginPage()),
                       )
                     ],
                   )

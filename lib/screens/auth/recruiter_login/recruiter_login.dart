@@ -101,10 +101,11 @@ class _RecruiterLoginPageState extends State<RecruiterLoginPage> {
                       Container(
                         padding:
                             const EdgeInsets.fromLTRB(15.0, 110.0, 0.0, 0.0),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             tOwnerLogin,
-                            style: Theme.of(context).textTheme.headline1,
+                            style: TextStyle(
+                                fontSize: 30, fontWeight: FontWeight.w700),
                           ),
                         ),
                       ),
