@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:hireplus/pages/home/Homescreen.dart';
 import 'package:hireplus/screens/signup/signup.dart';
 import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
