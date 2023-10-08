@@ -121,7 +121,7 @@ class _UserSignUpPageState extends State<UserSignUpPage> {
                 children: <Widget>[
                   Container(
                     padding: const EdgeInsets.fromLTRB(0, 80.0, 0.0, 0.0),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         tSignUp,
                         style: TextStyle(
