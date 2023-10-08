@@ -10,13 +10,13 @@ class BuildBoxShadowContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(10),
         color: Colors.white,
         boxShadow: const [
           BoxShadow(
-            color: ColorConstants.boxShadowColor,
-            blurRadius: kBlurRadius6,
-            offset: Offset(kOffsetX0, kOffsetY1),
+            color: Colors.black26,
+            blurRadius: 3.0,
+            offset: Offset(0, .1),
           ),
         ],
       ),
