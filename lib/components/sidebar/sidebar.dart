@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/pages/about/aboutus.dart';
@@ -195,7 +196,7 @@ class _NavDrawerState extends State<NavDrawer> {
                     await pref.remove('recruitername');
                     await pref.remove('recruiteremail');
                     await pref.remove('recruiterid');
-
+                    await FirebaseAuth.instance.signOut();
                     Get.offAll(const WelcomeScreen());
                   },
                 )

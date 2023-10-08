@@ -1,12 +1,16 @@
+import 'dart:math';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/models/usermodels.dart';
 import 'package:hireplus/screens/auth/signup/signup.dart';
+import 'package:hireplus/screens/home/userhome/userhomescreen.dart';
 import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
 import 'package:hireplus/utils/text_strings.dart';
 import 'package:hireplus/utils/widget_functions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class UserLoginPage extends StatefulWidget {
   const UserLoginPage({super.key});
@@ -22,100 +26,78 @@ class UserLoginPage extends StatefulWidget {
 class _UserLoginPageState extends State<UserLoginPage> {
   UserModel user = UserModel("", "", "", "");
 
-// try {
-//   final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
-//     email: user.email,
-//     password: user.password
-//   );
-// } on FirebaseAuthException catch (e) {
-//   if (e.code == 'user-not-found') {
-//     print('No user found for that email.');
-//   } else if (e.code == 'wrong-password') {
-//     print('Wrong password provided for that user.');
-//   }
-// }
-
   bool isLoading = false;
-  // Future login_save(BuildContext context) async {
-  //   // print({users.email, users.pswd});
-  //   final response = await http.post(
-  //       Uri.parse(
-  //         "${apidomain2}auths/pro/login",
-  //       ),
-  //       headers: <String, String>{
-  //         'Context-Type': 'application/json; charset=UTF-8',
-  //       },
-  //       body: <String, String>{
-  //         'email': users.email,
-  //         'pswd': users.pswd,
-  //       });
+  Future<void> _loginWithEmailAndPassword() async {
+    Color? msgclr;
+    String? msg;
+    String? msgdesc;
 
-  //   var jsonData = jsonDecode(response.body);
-  //   Color? msgclr;
-  //   String? msg;
-  //   String? msgdesc;
-  //   var str;
-  //   if (response.statusCode == 201) {
-  //     str = jsonData[0]["id"];
-  //     msgclr = Colors.blue[400];
-  //     msg = "Login Success";
-  //     msgdesc = "User Logined Successfully";
-  //     SharedPreferences pref = await SharedPreferences.getInstance();
-  //     await pref.setString('username', jsonData[0]["name"]);
-  //     await pref.setString('userid', str);
-  //     await pref.setBool('user', true);
-  //     Get.snackbar(
-  //       msg,
-  //       msgdesc,
-  //       icon: const Icon(Icons.person, color: Colors.white),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: msgclr,
-  //       borderRadius: 12,
-  //       margin: const EdgeInsets.all(15),
-  //       colorText: Colors.white,
-  //       duration: const Duration(seconds: 3),
-  //       isDismissible: true,
-  //       dismissDirection: DismissDirection.horizontal,
-  //       forwardAnimationCurve: Curves.bounceIn,
-  //     );
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //     Get.offAll(() => const HomeScreen());
-  //   } else {
-  //     msgclr = Colors.red[400];
-  //     msg = "Login Failed";
-  //     msgdesc = "Incorrect Email or Password";
-  //     Get.snackbar(
-  //       msg,
-  //       msgdesc,
-  //       icon: const Icon(Icons.person, color: Colors.white),
-  //       snackPosition: SnackPosition.BOTTOM,
-  //       backgroundColor: msgclr,
-  //       borderRadius: 12,
-  //       margin: const EdgeInsets.all(15),
-  //       colorText: Colors.white,
-  //       duration: const Duration(seconds: 3),
-  //       isDismissible: true,
-  //       dismissDirection: DismissDirection.horizontal,
-  //       forwardAnimationCurve: Curves.bounceIn,
-  //     );
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: user.email, password: user.password);
 
-  // Get.to(() => {UserExitHome(currentIndex:0)});
+      print(credential);
 
-  // Get.snackbar(
-  //   "Login Successfull",
-  //   "Logined",
-  //   colorText: Colors.white,
-  //   backgroundColor: Colors.lightblue,
-  //   icon: const Icon(Icons.add_alert),
-  // );
-  // Get.offAll(() => const UserExithome());
-  // }
+      msgclr = Colors.blue[400];
+      msg = "Login Success";
+      msgdesc = "User Logined Successfully";
+
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setString('username', user.name);
+      await pref.setString('useremail', user.email);
+      await pref.setString('userid', credential.user!.uid);
+      await pref.setBool('user', true);
+
+      Get.snackbar(
+        msg,
+        msgdesc,
+        icon: const Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: msgclr,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.bounceIn,
+      );
+
+      setState(() {
+        isLoading = false;
+      });
+
+      Get.offAll(() => const UserHomeScreen());
+    } on FirebaseAuthException catch (e) {
+      msgdesc = "";
+      if (e.code == 'user-not-found') {
+        msgdesc = "No user found for that email.";
+      } else if (e.code == 'wrong-password') {
+        msgdesc = "Wrong password provided for that user.";
+      }
+
+      msgclr = Colors.red[400];
+      msg = "Login Failed";
+
+      Get.snackbar(
+        msg,
+        msgdesc,
+        icon: const Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: msgclr,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.bounceIn,
+      );
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -157,7 +139,9 @@ class _UserLoginPageState extends State<UserLoginPage> {
                           TextField(
                             // //controller: emailController,
                             onChanged: (val) {
-                              // users.email = val;
+                              setState(() {
+                                user.email = val;
+                              });
                             },
                             decoration: const InputDecoration(
                                 labelText: 'Email',
@@ -175,7 +159,9 @@ class _UserLoginPageState extends State<UserLoginPage> {
                           TextField(
                             //controller: pswdController,
                             onChanged: (val) {
-                              // users.pswd = val;
+                              setState(() {
+                                user.password = val;
+                              });
                             },
                             decoration: const InputDecoration(
                                 labelText: 'Password',
@@ -210,8 +196,7 @@ class _UserLoginPageState extends State<UserLoginPage> {
                                     setState(() {
                                       isLoading = true;
                                     });
-                                    // print("saved");
-                                    // login_save(context);
+                                    _loginWithEmailAndPassword();
                                   },
                                   child: isLoading
                                       ? const Center(

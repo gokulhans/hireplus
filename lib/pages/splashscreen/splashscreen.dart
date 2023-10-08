@@ -20,12 +20,18 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Future.delayed(const Duration(seconds: 3)).then((value) async {
       SharedPreferences pref = await SharedPreferences.getInstance();
-      bool? user = await pref.getBool('user');
-      bool? recruiter = await pref.getBool('recruiter');
+      bool user = false;
+      bool recruiter = false;
+      if (pref.getBool('user') != null) {
+        user = pref.getBool('user')!;
+      }
+      if (pref.getBool('recruiter') != null) {
+        recruiter = pref.getBool('recruiter')!;
+      }
       print({user, recruiter});
-      if (recruiter!) {
+      if (recruiter) {
         Get.to(() => const RecruiterHomeScreen());
-      } else if (user!) {
+      } else if (user) {
         Get.to(() => const UserHomeScreen());
       } else {
         Get.to(() => const OnBoardingPage());

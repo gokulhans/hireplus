@@ -1,10 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hireplus/models/recruitermodel.dart';
 import 'package:hireplus/screens/auth/recruiter_signup/recruiter_signup.dart';
+import 'package:hireplus/screens/home/recruiterhome/recruiterhomescreen.dart';
 import 'package:hireplus/utils/text_strings.dart';
 import 'package:hireplus/utils/color_constants.dart';
 import 'package:hireplus/utils/sizes.dart';
 import 'package:hireplus/utils/widget_functions.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 bool isLoading = false;
 
@@ -16,71 +20,80 @@ class RecruiterLoginPage extends StatefulWidget {
 }
 
 class _RecruiterLoginPageState extends State<RecruiterLoginPage> {
-  // Future save() async {
-  //   // print({owners.email, owners.pswd});
-  //   final response = await http.post(
-  //       Uri.parse(
-  //         "${apidomain}auth/owner/login",
-  //       ),
-  //       headers: <String, String>{
-  //         'Context-Type': 'application/json; charset=UTF-8',
-  //       },
-  //       body: <String, String>{
-  //         'email': owners.email,
-  //         'pswd': owners.pswd,
-  //       });
-
-  //   Color? msgclr;
-  //   String? msg;
-  //   String? msgdesc;
-  //   var str;
-  //   var ownerid, storeid;
-  //   // print(storeid);
-  //   // print(ownerid);
-
-  //   if (response.statusCode == 201) {
-  //     var jsonData = jsonDecode(response.body);
-  //     print(jsonData);
-  //     ownerid = jsonData[0]["id"];
-  //     storeid = jsonData[0]["storeid"];
-  //     msgclr = Colors.green[400];
-  //     msg = "Login Success";
-  //     msgdesc = "User Logined Successfully";
-  //   } else {
-  //     msgclr = Colors.red[400];
-  //     msg = "Login Failed";
-  //     msgdesc = "Incorrect Email or Password";
-  //     setState(() {
-  //       isLoading = false;
-  //     });
-  //   }
-
-  //   Get.snackbar(
-  //     msg,
-  //     msgdesc,
-  //     icon: const Icon(Icons.person, color: Colors.white),
-  //     snackPosition: SnackPosition.BOTTOM,
-  //     backgroundColor: msgclr,
-  //     borderRadius: 12,
-  //     margin: const EdgeInsets.all(15),
-  //     colorText: Colors.white,
-  //     duration: const Duration(seconds: 3),
-  //     isDismissible: true,
-  //     dismissDirection: DismissDirection.horizontal,
-  //     forwardAnimationCurve: Curves.bounceIn,
-  //   );
-
-  //   SharedPreferences pref = await SharedPreferences.getInstance();
-  //   pref.setString("ownerid", ownerid);
-  //   pref.setString("storeid", storeid);
-  //   // Get.to(() => {OwnerExitHome(currentIndex:0)});
-  //   Navigator.of(context).pushAndRemoveUntil(
-  //       MaterialPageRoute(
-  //           builder: (BuildContext context) => const OwnerExithome()),
-  //       (Route<dynamic> route) => false);
-  // }
+  RecruiterModel user = RecruiterModel("", "", "", "");
 
   bool isLoading = false;
+  Future<void> _loginWithEmailAndPassword() async {
+    Color? msgclr;
+    String? msg;
+    String? msgdesc;
+
+    try {
+      final credential = await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: user.email, password: user.password);
+
+      print(credential);
+
+      msgclr = Colors.blue[400];
+      msg = "Login Success";
+      msgdesc = "User Logined Successfully";
+
+      SharedPreferences pref = await SharedPreferences.getInstance();
+      await pref.setString('recruitername', user.name);
+      await pref.setString('recruiteremail', user.email);
+      await pref.setString('recruiterid', credential.user!.uid);
+      await pref.setBool('recruiter', true);
+
+      Get.snackbar(
+        msg,
+        msgdesc,
+        icon: const Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: msgclr,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.bounceIn,
+      );
+
+      setState(() {
+        isLoading = false;
+      });
+
+      Get.offAll(() => const RecruiterHomeScreen());
+    } on FirebaseAuthException catch (e) {
+      msgdesc = "";
+      if (e.code == 'user-not-found') {
+        msgdesc = "No user found for that email.";
+      } else if (e.code == 'wrong-password') {
+        msgdesc = "Wrong password provided for that user.";
+      }
+
+      msgclr = Colors.red[400];
+      msg = "Login Failed";
+
+      Get.snackbar(
+        msg,
+        msgdesc,
+        icon: const Icon(Icons.person, color: Colors.white),
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: msgclr,
+        borderRadius: 12,
+        margin: const EdgeInsets.all(15),
+        colorText: Colors.white,
+        duration: const Duration(seconds: 3),
+        isDismissible: true,
+        dismissDirection: DismissDirection.horizontal,
+        forwardAnimationCurve: Curves.bounceIn,
+      );
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,7 +130,9 @@ class _RecruiterLoginPageState extends State<RecruiterLoginPage> {
                           TextField(
                             //controller: emailController,
                             onChanged: (val) {
-                              // owners.email = val;
+                              setState(() {
+                                user.email = val;
+                              });
                             },
                             decoration: const InputDecoration(
                                 labelText: 'Email',
@@ -135,7 +150,9 @@ class _RecruiterLoginPageState extends State<RecruiterLoginPage> {
                           TextField(
                             //controller: pswdController,
                             onChanged: (val) {
-                              // owners.pswd = val;
+                              setState(() {
+                                user.password = val;
+                              });
                             },
                             decoration: const InputDecoration(
                                 labelText: 'Password',
@@ -167,8 +184,7 @@ class _RecruiterLoginPageState extends State<RecruiterLoginPage> {
                                     setState(() {
                                       isLoading = true;
                                     });
-                                    // print("saved");
-                                    // save();
+                                    _loginWithEmailAndPassword();
                                   },
                                   child: isLoading
                                       ? const Center(
