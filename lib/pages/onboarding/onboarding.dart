@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/pages/welcomehome/welcomehome.dart';
+import 'package:hireplus/screens/notification/user_notification/user_notification.dart';
 import 'package:onboarding/onboarding.dart';
 
 class OnBoardingPage extends StatefulWidget {
@@ -284,7 +285,8 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
           //   index = 2;
           //   setIndex(2);
           // }
-          Get.to(() => const WelcomeScreen());
+          // Get.to(() => const WelcomeScreen());
+          Get.to(() => const UserNotifications());
         },
         child: const Padding(
           padding: defaultSkipButtonPadding,
