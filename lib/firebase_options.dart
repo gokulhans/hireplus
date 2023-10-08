@@ -25,10 +25,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -71,5 +68,14 @@ class DefaultFirebaseOptions {
     projectId: 'hireplus-4350a',
     storageBucket: 'hireplus-4350a.appspot.com',
     iosBundleId: 'com.example.hireplus',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBKgmtBa-wUCw3TaAiVxVGt0ymEkvJUpn8',
+    appId: '1:770620836493:ios:a95095a34a3bacf8a2b0c4',
+    messagingSenderId: '770620836493',
+    projectId: 'hireplus-4350a',
+    storageBucket: 'hireplus-4350a.appspot.com',
+    iosBundleId: 'com.example.hireplus.RunnerTests',
   );
 }

@@ -1,10 +1,10 @@
 // Welcome Screen Texts
-const String tWelcomeTitle = "Welcome To OutQ";
+const String tWelcomeTitle = "Welcome To Hireplus";
 const String tWelcomeSubTitle =
-    "Effortlessly schedule appointments and manage your calendar with our user-friendly booking app";
+    "Seekers to Jobers";
 const String tLogin = "Login";
 const String tSignUp = "Sign Up";
-const String tOwnerQuestion = "Are you a shope owner ?";
+const String tOwnerQuestion = "Are you a Job Recruiter ?";
 
 // Login Screen Texts
 const String tLoginQuestion = "Already have an account ?";
@@ -13,9 +13,9 @@ const String tLoginQuestion = "Already have an account ?";
 const String tSignUpQuestion = "New to hireplus ?";
 
 // Login Screen Texts
-const String tOwnerLogin = "Owner Login";
-const String tOwnerLoginQuestion = "Already have an owner account ?";
+const String tOwnerLogin = "Recruiter Login";
+const String tOwnerLoginQuestion = "Already have an Recruiter account ?";
 
 //SignUp Screen Texts
-const String tOwnerSignUpQuestion = "Want new owner Account ?";
-const String tOwnerSignUp = "Owner Sign Up";
+const String tOwnerSignUpQuestion = "Want new Recruiter Account ?";
+const String tOwnerSignUp = "Recruiter Sign Up";

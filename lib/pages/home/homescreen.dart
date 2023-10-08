@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:hireplus/components/appbar/appbarmain.dart';
 import 'package:hireplus/components/sidebar/sidebar.dart';
-import 'package:hireplus/screens/login/login.dart';
-import 'package:hireplus/screens/signup/signup.dart';
+import 'package:hireplus/screens/auth/login/login.dart';
+import 'package:hireplus/screens/auth/signup/signup.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:hireplus/pages/exithome/exithome.dart';
 import 'package:hireplus/utils/widget_functions.dart';
+import 'package:hireplus/pages/onboarding/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +17,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3)).then((value) async {
-      Get.to(() => Exithome());
+      Get.to(() => const OnBoardingPage());
     });
   }
 
