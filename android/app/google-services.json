@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "770620836493",
+    "firebase_url": "https://hireplus-4350a-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "hireplus-4350a",
+    "storage_bucket": "hireplus-4350a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:770620836493:android:4a90d39b05de40cfa2b0c4",
+        "android_client_info": {
+          "package_name": "com.hireplus.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "770620836493-2rgarc1ml3nvf2i7dstvvd60np0o4m8s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hireplus.app",
+            "certificate_hash": "30092bd7dd9ac28e917d903d9baf9de5c6f5010e"
+          }
+        },
+        {
+          "client_id": "770620836493-09kpesrqvlefas500arsd0acv4jm86up.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDehpxVf0c1LueQZaOYJycAKYq7uI7LcZM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "770620836493-09kpesrqvlefas500arsd0acv4jm86up.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "770620836493-5rflbnqpui8cq5ic3b57f4gnjbgt3hno.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.hireplusapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
